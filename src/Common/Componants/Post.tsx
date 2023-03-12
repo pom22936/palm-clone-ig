@@ -25,16 +25,16 @@ const Post: React.FC<Props> = (props: Props) => {
   return (
     <>
         {/* herder post */}
-        <HerderPost name={props.data.title} time='16 h'/>
+        <HerderPost name={props.data.title} time={props.data.id.toString() + 'h'}/>
         <br/>
         {/* Imgage post */}
-        <ImagePost listImages={props.data.images}/>
+        <ImagePost listImages={props.data.images} postId={props.data.id.toString()}/>
         <br/>
         {/* Action Post */}
-        <ActionPost />
+        <ActionPost postId={props.data.id.toString()} openModal={setIsModalOpen}/>
         <br/>
         {/* detail post */}
-        <DetailPost />
+        <DetailPost descriptions={props.data.description} initLike={props.data.stock}/>
         {/* comment */}
         <Row>
             <Col span={24}>
@@ -48,7 +48,7 @@ const Post: React.FC<Props> = (props: Props) => {
         </Row>
         <br/>
         <Modal title="" open={isModalOpen} onCancel={handleCancel} footer={null} width={'80%'}>
-            <ViewDetailPost listImages={props.data.images} title={props.data.title} description={props.data.description}/>
+            <ViewDetailPost listImages={props.data.images} title={props.data.title} description={props.data.description} postId={props.data.id.toString()}/>
         </Modal>
     </>
   )

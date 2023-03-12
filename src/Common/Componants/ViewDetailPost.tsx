@@ -12,6 +12,7 @@ interface Params {
     listImages: string[]
     title: string
     description: string
+    postId: string
 }
 
 type Props = Params 
@@ -25,7 +26,6 @@ const ViewDetailPost: React.FC<Props> = (props: Props) => {
 
     useMemo(() => {
         getAllComments().then((comments) => {
-            console.log(comments)
             setData(comments.data)
         })
     }, [])
@@ -87,7 +87,7 @@ const ViewDetailPost: React.FC<Props> = (props: Props) => {
     <>
         <Row>
             <Col span={16}>
-                <ImagePost listImages={props.listImages}/>
+                <ImagePost listImages={props.listImages} postId={props.postId}/>
             </Col>
             <Col span={8} style={{ padding: 5 }}>
                 <HerderPost name={props.title} />

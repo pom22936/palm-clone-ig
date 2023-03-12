@@ -101,6 +101,10 @@ button:focus-visible {
 }
 
 /* over  */
+.aside {
+  border-right: 1px solid #818080;
+}
+
 .ant-layout .ant-layout-sider {
     position: relative;
     min-width: 0;
@@ -177,5 +181,9 @@ button:focus-visible {
   height: auto;
   position: fixed;
   margin-top: 200px;
-  margin-left: 300px;
+  margin-left: 220px;
+}
+
+.ActionPostIcons {
+  cursor: pointer;
 }

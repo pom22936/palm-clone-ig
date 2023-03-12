@@ -12,7 +12,6 @@ const HomePage: React.FC = () => {
   const { data, error, isLoading } = useGetAllProductQuery(JSON.stringify(setting))
 
     useMemo(() => {
-        console.log(data);
         if (data) {
           const temp = [...Items, ...data.products]
           const arrayUniqueByKey = temp.filter((a, i) => temp.findIndex((s) => a.id === s.id) === i)
@@ -36,7 +35,7 @@ const HomePage: React.FC = () => {
     <>
       <Row>
         <Col span={2} />
-        <Col span={20} style={{ marginTop: '6vh', paddingLeft: '4vh', paddingRight: '25%' }} >
+        <Col span={20} style={{ marginTop: '6vh', paddingLeft: '4vh', maxWidth: 550 }} >
         <InfiniteScroll
           dataLength={Items?.length || 0} //This is important field to render the next data
           next={fetchData}

@@ -1,4 +1,5 @@
 import React, { cloneElement } from 'react'
+import { LikeProvider } from '../../Services/Context/LikeContext'
 
 function ProviderComposer({ contexts, children }: any) {
     return contexts.reduce(
@@ -14,7 +15,7 @@ export default function ContextProvider({ children }: any) {
         <ProviderComposer
             // add providers to array of contexts
             contexts={[
-                
+                <LikeProvider />
             ]}
         >
             {children}

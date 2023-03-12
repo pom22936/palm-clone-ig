@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useState } from 'react'
 import CustomHerder from './customHerder';
 import Logo from '../assets/images/LogoIG.png'
 import Home from '../assets/Icons/Home.svg'
@@ -10,9 +10,10 @@ import Reels from '../assets/Icons/Reels.svg'
 import Search from '../assets/Icons/Search.svg'
 import MenuIcon from '../assets/Icons/Menu.svg'
 import User from '../assets/images/User.png'
-import { Layout, Menu, Image, Space} from 'antd';
+import { Layout, Menu, Image, Space, Drawer} from 'antd';
 import CustomSidebar from './customSidebar';
 import HomePage from '../Pages/HomePage';
+import SearchSideBar from '../Common/Componants/SearchSideBar';
 
 const { Header, Content, Sider } = Layout;
 type Props = PropsWithChildren
@@ -28,21 +29,33 @@ const siderStyle: React.CSSProperties = {
 const layoutCustom: React.FC = (props: Props) => {
     const listMenu: string[] = ['Home', 'Search', 'Explore', 'Reels', 'Massages', 'Notifications', 'Create', 'Profile']
     const listImage = [Home, Search, Explore, Reels, Massages, Notifications, Create, User]
+    const [open, setOpen] = useState(false);
+    const [isBroken, setIsBroken] = useState(false)
+
+    const showDrawer = () => {
+        setOpen(true);
+    }
+    
+    const onClose = () => {
+        setOpen(false);
+    }
   return (
     <>
         <Layout style={{ minHeight:"100vh" , background: '#ffffff' }}>
             <Sider
-                breakpoint="lg"
+                breakpoint="xl"
                 collapsedWidth="0"
                 onBreakpoint={(broken) => {
-                console.log(broken);
+                    console.log(broken);
+                    setIsBroken(broken)
                 }}
                 onCollapse={(collapsed, type) => {
-                console.log(collapsed, type);
+                    console.log(collapsed, type);
                 }}
                 theme='light'
-                width={240}
+                width={isBroken ? 0 : '20%'}
                 className='main-sidebar'
+                style={{ display: isBroken ? 'none' : 'block'}}
             >
                 <div className='pd5' style={{position: 'fixed'}}>
                     <div style={{ margin: '3.5vh 2.7vh 4vh' }}>
@@ -58,8 +71,8 @@ const layoutCustom: React.FC = (props: Props) => {
                         items={listMenu.map(
                             (data, index) => ({
                                 key: String(index + 1),
-                                icon: <Image src={listImage[index]} preview={false} width={24} style={{paddingTop: 10}}/>,
-                                label: <span style={{ paddingLeft: 15, fontSize: 18, fontWeight: 400 }}>{data}</span>,
+                                icon: <Image src={listImage[index]} preview={false} width={24} style={{paddingTop: 10}} onClick={showDrawer}/>,
+                                label: <span style={{ paddingLeft: 15, fontSize: 18, fontWeight: 400 }} onClick={showDrawer}>{data}</span>,
                             }),
                         )}
                     />
@@ -89,12 +102,21 @@ const layoutCustom: React.FC = (props: Props) => {
                     <Space direction="vertical" style={{ width: '100%' }} size={[0, 48]}>
                         <Layout>
                             <Content style={{ zIndex: -1 }}></Content>
-                            <Sider style={siderStyle} width={350}>
+                            <Sider style={siderStyle} width={isBroken ? 0 : '20%'}>
                                 <CustomSidebar />
                             </Sider>
                         </Layout>
                     </Space>
                 </Content>
+                <Drawer
+                    title="Search"
+                    placement={'left'}
+                    closable={false}
+                    onClose={onClose}
+                    open={open}
+                >
+                    <SearchSideBar />
+                </Drawer>
                 {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer> */}
             </Layout>
         </Layout>

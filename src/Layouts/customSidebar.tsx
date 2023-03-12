@@ -10,7 +10,7 @@ const customSidebar: React.FC = () => {
     <>
         <Row  gutter={[16, 16]} justify={'start'} style={{lineHeight: '120px'}}>
             <Col span={20}>
-                <CostomAvatar size={62} name='test' isHorizontal={true} extra={'fullName'}/>
+                <CostomAvatar size={62} name='User' isHorizontal={true} extra={'fullName'}/>
             </Col>
             <Col span={4}>
                 <Link href="#" style={{ fontSize: 11 }}>

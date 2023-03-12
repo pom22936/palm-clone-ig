@@ -151,8 +151,31 @@ button:focus-visible {
 }
 
 .img-posted {
-  min-width: 480;
+  min-width: 480px;
   height: auto;
+  min-height: 480px;
   border: 1px solid #CCCCCC;
   border-radius: 2%;
+  position: absolute;
+  z-index: 1;
+}
+
+#slideSource {
+  opacity: 0;
+  transition: opacity 1s; 
+  width: 100px;
+  height: 0px;
+  z-index: 3;
+  position: fixed;
+}
+
+#slideSource.fade {
+  opacity: 1;
+  z-index: 3;
+  background: 'red' !important;
+  width: 100px;
+  height: auto;
+  position: fixed;
+  margin-top: 200px;
+  margin-left: 300px;
 }

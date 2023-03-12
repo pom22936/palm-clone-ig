@@ -1,20 +1,22 @@
 import { Row, Col, Typography, Input, Modal } from 'antd'
 import React, { useState } from 'react'
-import Example1 from '../../assets/images/Example1.jpg'
-import Example2 from '../../assets/images/Example2.jpg'
-import Example3 from '../../assets/images/Example3.jpg'
 import { SmileOutlined } from '@ant-design/icons';
 import ViewDetailPost from './ViewDetailPost'
 import HerderPost from './PostComponant/HerderPost'
 import ImagePost from './PostComponant/ImagePost'
 import ActionPost from './PostComponant/ActionPost'
 import DetailPost from './PostComponant/DetailPost'
+import { products } from '../../Models/Products'
 
 const { Text, Link } = Typography;
-const Post: React.FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const listImages = [Example1, Example2, Example3]
+interface Params {
+    data: products
+}
+
+type Props = Params
+const Post: React.FC<Props> = (props: Props) => {
+    const [isModalOpen, setIsModalOpen] = useState(false)
     
     const handleCancel = () => {
         setIsModalOpen(false);
@@ -23,10 +25,10 @@ const Post: React.FC = () => {
   return (
     <>
         {/* herder post */}
-        <HerderPost name='Test' time='16 h'/>
+        <HerderPost name={props.data.title} time='16 h'/>
         <br/>
         {/* Imgage post */}
-        <ImagePost listImages={listImages}/>
+        <ImagePost listImages={props.data.images}/>
         <br/>
         {/* Action Post */}
         <ActionPost />
@@ -36,7 +38,7 @@ const Post: React.FC = () => {
         {/* comment */}
         <Row>
             <Col span={24}>
-                <Link href='#' onClick={() => setIsModalOpen(true)}><Text type="secondary">View All 68 comment</Text></Link>
+                <Link href='#' onClick={() => setIsModalOpen(true)}><Text type="secondary">View All 3 comment</Text></Link>
             </Col>
             <Col span={24} style={{ borderBottom: '1px solid #cccccc'}}>
                 <Input placeholder="Add a Comment..." bordered={false} suffix={
@@ -44,8 +46,9 @@ const Post: React.FC = () => {
                 }/>
             </Col>
         </Row>
+        <br/>
         <Modal title="" open={isModalOpen} onCancel={handleCancel} footer={null} width={'80%'}>
-            <ViewDetailPost listImages={listImages}/>
+            <ViewDetailPost listImages={props.data.images} title={props.data.title} description={props.data.description}/>
         </Modal>
     </>
   )

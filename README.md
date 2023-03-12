@@ -3,7 +3,7 @@ how to install
 
 how to start backEnd
 ### `npm install -g json-server`
-### `cd src/Sercice`
+### `cd src/Sercices`
 ### `json-server --watch db.json`
 
 how to start frontend
